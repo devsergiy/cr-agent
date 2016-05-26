@@ -23,7 +23,8 @@ class Agent
     response = @conn.post do |req|
       req.url API_PATH
       req.headers['Content-Type'] = 'application/json'
-      req.body = { instance_id: "unagi" }.to_json
+      req.headers['api_key'] = @cfg.config.api_key
+      req.body = { instance_id: @cfg.instance_id }.to_json
     end
     save_token(response)
   end
@@ -32,9 +33,10 @@ class Agent
     puts 'submit_info'
 
     response = @conn.put do |req|
-      req.url "#{API_PATH}/#{'unagi'}"
+      req.url "#{API_PATH}/#{@cfg.instance_id}"
       req.headers['Content-Type'] = 'application/json'
-      req.headers['token'] = @cfg.token
+      req.headers['Token'] = @cfg.token
+      req.headers['Api-Key'] = @cfg.config.api_key
       req.body = SysInfo.collect.to_json
     end
     save_token(response)
