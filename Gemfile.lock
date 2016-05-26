@@ -7,18 +7,11 @@ GEM
     minitest (5.9.0)
     multipart-post (2.0.0)
     rack (1.6.4)
-    rack-protection (1.5.3)
-      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (10.5.0)
     rufus-scheduler (3.2.1)
-    sinatra (1.4.7)
-      rack (~> 1.5)
-      rack-protection (~> 1.4)
-      tilt (>= 1.3, < 3)
     sys-proctable (1.0.0)
-    tilt (2.0.4)
 
 PLATFORMS
   ruby
@@ -30,7 +23,6 @@ DEPENDENCIES
   rack-test (~> 0.6)
   rake (~> 10.0)
   rufus-scheduler
-  sinatra (~> 1.4)
   sys-proctable
 
 BUNDLED WITH
