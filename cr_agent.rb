@@ -1,8 +1,12 @@
-class CrAgent < Sinatra::Base
+require 'rufus-scheduler'
 
-  set :public_folder => "public", :static => true
+scheduler = Rufus::Scheduler.new
+agent = Agent.new
 
-  get "/" do
-    erb :welcome
-  end
+agent.register_to_monitor unless agent.registered?
+
+scheduler.every '5s' do
+  agent.submit_info
 end
+
+scheduler.join
