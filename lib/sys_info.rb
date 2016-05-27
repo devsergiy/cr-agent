@@ -14,7 +14,7 @@ module SysInfo
   protected
 
   def self.cpu_usage
-    %x{top -n1}.lines.find{ |line| /Cpu\(s\):/.match(line) }.split[1]
+    %x{TERM=vt100 top -b -n 1}.lines.find{ |line| /Cpu\(s\):/.match(line) }.split[1]
   end
 
   def self.disk_usage
