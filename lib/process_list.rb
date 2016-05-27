@@ -6,8 +6,8 @@ module ProcessList
   FIELDS = %i(pid name vsize pctcpu pctmem).freeze
   FIELDS_MAP = {
     vsize:   :virtual_memory,
-    pctcpu:  :cpu_use_percentage,
-    pctmem:  :mem_use_percentage,
+    pctcpu:  :cpu_usage,
+    pctmem:  :mem_usage,
   }.freeze
 
   def self.collect
