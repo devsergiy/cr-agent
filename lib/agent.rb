@@ -5,11 +5,7 @@ class Agent
 
   def initialize
     @cfg = Config.new
-    @conn = Faraday.new(:url => @cfg.config.monitor_url) do |faraday|
-      faraday.request  :url_encoded             # form-encode POST params
-      faraday.response :logger                  # log requests to STDOUT
-      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-    end
+    @conn = self.class.faraday_connection(@cfg)
   end
 
   def register_to_monitor
@@ -35,6 +31,14 @@ class Agent
       req.body = SysInfo.collect.to_json
     end
     save_token(response)
+  end
+
+  def self.faraday_connection(config)
+    Faraday.new(:url => config.config.monitor_url) do |faraday|
+      faraday.request  :url_encoded             # form-encode POST params
+      faraday.response :logger                  # log requests to STDOUT
+      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
   end
 
   protected
