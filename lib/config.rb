@@ -2,7 +2,7 @@ require 'yaml'
 require 'ostruct'
 
 class Config
-  BASE_PATH       = './config/'
+  BASE_PATH       = './config'
   CFG_FILE_NAME   = 'cfg.yml'.freeze
   TOKEN_FILE_NAME = 'token'.freeze
 
@@ -19,7 +19,7 @@ class Config
   end
 
   def dump_token
-    File.open(BASE_PATH + TOKEN_FILE_NAME, 'w') { |f| f.write(token) }
+    File.open(token_file_name, 'w') { |f| f.write(token) }
   end
 
   def env
@@ -29,14 +29,14 @@ class Config
   protected
 
   def read_token
-    path = BASE_PATH + TOKEN_FILE_NAME
+    path = token_file_name
     return unless File.file?(path)
 
     @token = File.open(path, 'r') { |f| f.read }.strip
   end
 
   def read_config
-    path = BASE_PATH + CFG_FILE_NAME
+    path = File.join(BASE_PATH, CFG_FILE_NAME)
     raise 'No config provided' unless File.file?(path)
 
     @config = OpenStruct.new YAML.load_file(path)
@@ -44,10 +44,14 @@ class Config
 
   def retrieve_id
     @instance_id =
-      if env == 'development'
+      if env != 'production'
         'unagi'
       else
         %x{ curl http://169.254.169.254/latest/meta-data/instance-id }
       end
+  end
+
+  def token_file_name
+    File.join(BASE_PATH, TOKEN_FILE_NAME)
   end
 end

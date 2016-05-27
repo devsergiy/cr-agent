@@ -1,6 +1,3 @@
-# require 'process_list'
-load 'lib/process_list.rb'
-
 module SysInfo
   def self.collect
     {
