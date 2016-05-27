@@ -6,7 +6,7 @@ class Config
   CFG_FILE_NAME   = 'cfg.yml'.freeze
   TOKEN_FILE_NAME = 'token'.freeze
 
-  ENVIRONMENT_VARIABLE_NAME = "ENV".freeze
+  ENVIRONMENT_VARIABLE_NAME = "RACK_ENV".freeze
   DEFAULT_ENVIRONMENT       = "development".freeze
 
   attr_reader :config, :instance_id
