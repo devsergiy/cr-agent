@@ -12,10 +12,6 @@ class Agent
     end
   end
 
-  def registered?
-    @cfg.token != nil && @cfg.token != ''
-  end
-
   def register_to_monitor
     puts 'register_to_monitor'
 
@@ -40,6 +36,8 @@ class Agent
     end
     save_token(response)
   end
+
+  protected
 
   def save_token(response)
     return unless response.success?
