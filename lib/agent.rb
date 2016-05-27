@@ -1,5 +1,4 @@
 require 'json/ext'
-require 'byebug'
 
 class Agent
   API_PATH = '/api/instances'.freeze
