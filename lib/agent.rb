@@ -22,7 +22,7 @@ class Agent
     response = @conn.post do |req|
       req.url API_PATH
       req.headers['Content-Type'] = 'application/json'
-      req.headers['api_key'] = @cfg.config.api_key
+      req.headers['Api-Key'] = @cfg.config.api_key
       req.body = { instance_id: @cfg.instance_id }.to_json
     end
     save_token(response)
