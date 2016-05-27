@@ -19,6 +19,6 @@ module ProcessList
           p[new_name] = p.delete(old_name)
         end
       end
-    end
+    end.first(15)
   end
 end
